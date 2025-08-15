@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <p> 
+        <form action="/view_apps/{{ app['uid'] }}" method="POST">
+        app id: {{ app['appid'] }} </br>
+        uid: {{ app['uid'] }}</br>
+        status: {{ app['status'] }}</br>
+        transcript: {{ app['transcript'] }}</br>
+        Type of degree: {{ past_d1['type']}}</br>
+        GPA : {{ past_d1['gpa']}}</br>
+        Majored in: {{ past_d1['major']}}</br>
+        University: {{ past_d1['college']}}</br>
+        year: {{ past_d1['year']}}</br>
+        {% if past_d2 %}
+            Type of second degree: {{ past_d2['type']}}</br>
+            GPA : {{ past_d2['gpa']}}</br>
+            Majored in: {{ past_d2['major']}}</br>
+            University: {{ past_d2['college']}}</br>
+            year: {{ past_d2['year']}}</br>
+        {% endif %}
+        semester: {{ app['semester'] }}</br>
+        year: {{ app['year'] }}</br>
+        experience: {{ app['experience'] }}</br>
+        aoi: {{ app['aoi'] }}</br>
+        Writer: {{ rec['writer']}}</br>
+        Writer email: {{ rec['email']}}</br>
+        Title: {{ rec['title']}}</br>
+        Affiliation: {{ rec['affiliation']}}</br>
+        Message: {{ rec['message']}}</br>
+
+        Update transcript:
+        <select name="transcript_type">
+            {% for type in transcript_types %}
+                <option value="{{ type }}"> {{ type }}</option>
+            {% endfor %}
+        </select>
+    </br>
+        Update status: 
+        {% if rec['message'] %}
+        <select name="status_type">
+            {% for type in status_types %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+        <input type="submit" name="submit"> 
+        <a href="/home"> Go back</a>
+        </form>
+    </p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <h3> user: {{ cur_user['id'] }} </h3>
+    Email = {{ cur_user['email'] }}
+    Password = {{ cur_user['password'] }}
+    Firstname = {{ cur_user['fname'] }}
+    Lastname = {{ cur_user['lname'] }}
+    Address = {{ cur_user['address'] }}
+    SSN = {{ cur_user['ssn'] }}
+    UserType = {{ cur_user['type'] }} </br>
+    <form action="/user_page/{{ id }}" method="POST">
+        <h3> Update user: </h3> </br>
+        Email <input type="text" name="email"> 
+        Password <input type="password" name="password"> 
+        Firstname <input type="text" name="firstname"> 
+        Lastname <input type="text" name="lastname"> 
+        Address <input type="text" name="address"> 
+        SSN <input type="text" name="ssn"> 
+        <select name="user_type">
+            {% for type in user_types %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+    <input type="submit" name="submit"> </br>
+    <a href="/home"> Go back</a>
+    </form>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decide</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="form-label">Decision Application</h1>
+    <div class="form-inline">
+        Name: &nbsp; {{ user['fname'] }} , {{ user['lname'] }}<br>
+        Student Number: &nbsp; {{ user['ssn'] }}
+        Semester and Year of Application: {{ app['semester'] }} , {{ app['year'] }}<br>
+        Applying for Degree: {{ app['degree'] }}
+    </div>
+    <div class="form-inline">
+        Areas of Interest: {{ app['aoi'] }}<br>
+        Work Experience: {{ app['experience'] }}<br>
+    </div>
+    <table class="table" id="review_table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Rating</th>
+            <th>Deficiency</th>
+            <th>Reason</th>
+            <th>Advisor</th>
+            <th>Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+        <tr class="review_tr">
+            <td>{{ loop.index + 1 }}</td>
+            <td>{{ review['rating'] }}</td>
+            <td>{{ review['deficiency'] }}</td>
+            <td>{{ review['reason'] }}</td>
+            <td>{{ review['advisor'] }}</td>
+            <td>{{ review['comments'] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Average Rating: </strong>{{ review_avg }}</p>
+    <form class = "card p-3 bg-light" action="/decide_application" method="POST" style="align-items: center">
+        <div>
+            <div class="form-inline">
+                Final Decision:
+                <select name="decide_final">
+                    <option value="admitted" selected>Admit</option>
+                    <option value="denied">Deny</option>
+                </select>
+            </div>
+            <input type="hidden" name="app_id" value="{{ app['appid'] }}">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

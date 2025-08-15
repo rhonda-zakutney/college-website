@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    {% if session['type']  == 'Applicant' %}
+        <form action="/application" method="POST">
+        {% if app %}
+            <button name="viewapp" value="view">View Application</button>
+            {% if not sent %}
+            <button name="sendrec" value="rec">Email your Recommender!</button>
+            {% endif %}
+        {% else %}
+            <button name="createapp" value="create">Create Application</button>
+        {% endif %}
+        </form>
+    {% endif %}
+
+    {% if session['type'] == 'GS' %}
+        {% for a in app %}
+            <a href="\view_apps\{{ a['uid'] }}"> {{ a['uid'] }}</a> </br>
+        {% endfor %}
+    {% endif %}
+
+    {% if session['type'] == 'Admin' %}
+        <a href="\create_account"> create account</a> </br>
+        Users: </br>
+        {% for a in cur_users %} 
+            <a href="\user_page\{{ a['uid'] }}"> {{ a['fname']}} {{ a['lname'] }} </a> : <a href="\remove_user\{{ a['uid'] }}"> remove user</a></br>
+        {% endfor %}
+    {% endif %}
+    {% if session['type'] == 'CAC' %}
+        <form action="/application" method="POST">
+        {% for a in app %}
+            <button name="decideapp" value="{{ a['uid'] }}"> Decide &nbsp;{{ a['uid'] }} </button>
+        {% endfor %}
+        </form>
+    {% endif %}
+
+    {% if session['type'] == 'Reviewer' %}
+        <form action="/application" method="POST">
+        {% for a in app %}
+            <button name="reviewapp" value="{{ a['uid'] }}"> Review &nbsp;{{ a['uid'] }} </button>
+
+        {% endfor %}
+        </form>
+    {% endif %}
+    <a href="\logout"><h3>Logout</h3></a>
+</body>
+</html>

@@ -6,3 +6,8 @@ During our group project I was in charge of the applications aspect of the websi
 - Create review forms for each faculty reviewer. 
 
 ![SQL](https://github.com/user-attachments/assets/74a1e28f-fcdd-4cdf-a442-4e4da00f373f)
+
+
+To view samples of js code navigate to APPS folder and open static folder
+To view samples of html code navigate to APPS folder and open templates folder
+To view samples of python code navigate to APPS folder and open main.py file
